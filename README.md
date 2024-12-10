@@ -54,7 +54,14 @@ Frontend (.env):
 NEXT_PUBLIC_BACKEND_URL=http://localhost:3001
 ```
 
-### 4. Running with Docker
+### 4. Running Prisma on the Backend
+Navigate to the backend folder and generate Prisma client files:
+
+```
+npx prisma generate
+```
+
+### 5. Running with Docker
 To run postgres using Docker, execute:
 ```
 docker-compose up 
@@ -62,7 +69,7 @@ docker-compose up
 ```
 
 
-### 5. Running the Application
+### 6. Running the Application
 In the project root, run the following command to start both the backend and frontend:
 ```
 npm run dev
