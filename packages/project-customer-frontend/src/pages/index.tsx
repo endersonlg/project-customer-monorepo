@@ -7,9 +7,9 @@ import { getColors } from '@/http/get-colors'
 import { GetServerSideProps, InferGetServerSidePropsType } from 'next'
 import { zodResolver } from '@hookform/resolvers/zod'
 import { z } from 'zod'
-import axios, { AxiosError } from 'axios'
-import { useRouter } from 'next/router'
-import { CustomerDTO } from '@/dtos/customer-dto'
+// import axios, { AxiosError } from 'axios'
+// import { useRouter } from 'next/router'
+// import { CustomerDTO } from '@/dtos/customer-dto'
 import { FailedModal } from '@/components/failed-modal'
 import { useState } from 'react'
 import { TextArea } from '@/components/text-area'
@@ -48,41 +48,46 @@ export default function SignUp({
 }: InferGetServerSidePropsType<typeof getServerSideProps>) {
   const [errorMessage, setErrorMessage] = useState('')
 
-  const { register, handleSubmit, control, formState } = useForm<CustomerData>({
+  const {
+    register,
+    // handleSubmit,
+    control,
+    formState,
+  } = useForm<CustomerData>({
     resolver: zodResolver(CustomerSchema),
   })
 
   const { errors, isSubmitting } = formState
 
-  const router = useRouter()
+  // const router = useRouter()
 
   function handleCloseFailedModal() {
     setErrorMessage('')
   }
 
-  async function onSubmit({
-    name,
-    email,
-    cpf,
-    color,
-    observation,
-  }: CustomerData) {
-    try {
-      const { data } = await axios.post<CustomerDTO>('/api/sign-up', {
-        name,
-        email,
-        cpf,
-        preferred_color_id: color,
-        observation,
-      })
+  // async function onSubmit({
+  //   name,
+  //   email,
+  //   cpf,
+  //   color,
+  //   observation,
+  // }: CustomerData) {
+  //   try {
+  //     const { data } = await axios.post<CustomerDTO>('/api/sign-up', {
+  //       name,
+  //       email,
+  //       cpf,
+  //       preferred_color_id: color,
+  //       observation,
+  //     })
 
-      router.push(`/success/${data.id}`)
-    } catch (err) {
-      const messageErrorAux =
-        (err as AxiosError<{ message: string }>).response?.data?.message || ''
-      setErrorMessage(messageErrorAux)
-    }
-  }
+  //     router.push(`/success/${data.id}`)
+  //   } catch (err) {
+  //     const messageErrorAux =
+  //       (err as AxiosError<{ message: string }>).response?.data?.message || ''
+  //     setErrorMessage(messageErrorAux)
+  //   }
+  // }
 
   return (
     <main className="flex items-center justify-center">
@@ -98,7 +103,7 @@ export default function SignUp({
         </p>
 
         <form
-          onSubmit={handleSubmit(onSubmit)}
+          // onSubmit={handleSubmit(onSubmit)}
           className="flex flex-col items-center gap-6 w-full"
         >
           <Input
