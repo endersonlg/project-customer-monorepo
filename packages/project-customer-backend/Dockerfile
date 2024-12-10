@@ -4,6 +4,7 @@ WORKDIR /app
 
 COPY package*.json ./
 COPY prisma ./prisma/
+COPY seed ./seed
 
 RUN npm install
 
