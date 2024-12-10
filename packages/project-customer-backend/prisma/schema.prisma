@@ -1,0 +1,44 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Color {
+  id        String @id @default(uuid()) @db.VarChar(36)
+  name      String @unique @db.VarChar(50)
+  hex_value String @db.VarChar(7)
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  Customer Customer[]
+
+  @@map("colors")
+}
+
+model Customer {
+  id                 String  @id @default(uuid()) @db.VarChar(36)
+  name               String  @db.VarChar(255)
+  cpf                String  @unique @db.VarChar(11)
+  email              String  @unique @db.VarChar(320)
+  preferred_color_id String  @db.VarChar(36)
+  preferred_color    Color   @relation(fields: [preferred_color_id], references: [id])
+  observation        String?
+
+  created_at DateTime  @default(now())
+  updated_at DateTime  @updatedAt
+  deleted_at DateTime?
+
+  @@map("customers")
+}
