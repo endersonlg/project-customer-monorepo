@@ -15,11 +15,18 @@ async function main() {
   ];
 
   for (const color of rainbowColors) {
-    await prisma.color.upsert({
+    const existingColor = await prisma.color.findUnique({
       where: { name: color.name },
-      update: { hex_value: color.hex },
-      create: { name: color.name, hex_value: color.hex },
     });
+
+    if (!existingColor) {
+      await prisma.color.create({
+        data: { name: color.name, hex_value: color.hex },
+      });
+      console.log(`Added new color: ${color.name}`);
+    } else {
+      console.log(`Color ${color.name} already exists.`);
+    }
   }
 
   console.log('Colors seeded successfully!');
