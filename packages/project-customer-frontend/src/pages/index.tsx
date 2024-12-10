@@ -160,6 +160,9 @@ export default function SignUp({
 export const getServerSideProps = (async () => {
   const colors = await getColors()
 
+  console.log(colors)
+  console.log(process.env.NEXT_PUBLIC_BACKEND_URL)
+
   const colorsOptions: ColorOption[] = colors.map((color) => ({
     label: color.name,
     value: color.id,
