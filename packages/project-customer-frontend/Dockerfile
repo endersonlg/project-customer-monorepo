@@ -13,6 +13,8 @@ COPY package.json ./
 
 RUN npm install
 
+COPY package-lock.json ./
+
 RUN npm ci
 
 FROM base AS builder
