@@ -18,7 +18,7 @@ export default function App({ Component, pageProps }: AppProps) {
         openGraph={{
           type: 'website',
           locale: 'en_US',
-          url: 'https://project-customer-monorepo-1.onrender.com',
+          url: 'favorite-color.onrender.com',
           siteName: 'Favorite Color',
         }}
       />
