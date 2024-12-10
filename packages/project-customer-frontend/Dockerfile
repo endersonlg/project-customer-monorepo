@@ -13,7 +13,7 @@ COPY package.json ./
 
 RUN npm install
 
-COPY package-lock.json ./
+COPY --from=deps package-lock.json ./
 
 RUN npm ci
 
